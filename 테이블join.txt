@@ -1,0 +1,132 @@
+다중테이블을 관리하기 위해서 두가지 방법으로 실습한다.
+
+1번 EmpAndDept.java
+
+두 테이블의 모든 컬럼을 한 클래스에 담은 VO, setter/getter 메서드는 생략
+
+public class EmpAndDept {
+      // Emp 테이블 컬럼
+	public int empno;
+	public String ename;
+	public String job;
+	public int mgr;
+	public String hiredate;
+	public int sal;
+	public int comm;
+	public int empDeptno;
+
+  // Dept 테이블 컬럼
+	public int deptno;
+	public String dname;
+	public String loc;
+}
+
+2번 Emp.java
+
+Emp 테이블의 컬럼을 담은 클래스에 Dept VO를 참조변수로 활용한 VO, setter/getter 메서드는 생략
+
+public class Emp {
+	public int empno;
+	public String ename;
+	public String job;
+	public int mgr;
+	public String hiredate;
+	public int sal;
+	public int comm;
+	public int deptno;
+	public Dept dept;
+
+}
+
+1번 DAO -> EmpAndDeptDao.java
+
+public static ArrayList<EmpAndDept> selectEmpAndDeptList() throws Exception {
+	ArrayList<EmpAndDept> list = new ArrayList<EmpAndDept>();
+	Connection con = dbConnection();
+	
+   String sql = "SELECT e.empno, e.ename, e.job, e.mgr, e.hiredate, e.sal, e.comm, " + 
+       "e.deptno, d.deptno, d.dname, d.loc FROM emp e INNER JOIN dept d ON e.deptno = d.deptno";
+	
+	PreparedStatement stmt = con.prepareStatement(sql);
+	ResultSet rs = stmt.executeQuery();
+		
+	while(rs.next()) {
+		EmpAndDept empAndDept = new EmpAndDept();
+			
+		empAndDept.empno = rs.getInt(1);
+		empAndDept.ename = rs.getString(2);
+		empAndDept.job = rs.getString(3);
+		empAndDept.mgr = rs.getInt(4);
+		empAndDept.hiredate = rs.getString(5);
+		empAndDept.sal = rs.getInt(6);
+		empAndDept.comm = rs.getInt(7);
+		empAndDept.empDeptno = rs.getInt(8);
+		empAndDept.deptno = rs.getInt(9);
+		empAndDept.dname = rs.getString(10);
+		empAndDept.loc = rs.getString(11);
+			
+		list.add(empAndDept);
+	}
+		
+	return list;
+
+}
+
+2번 DAO -> EmpDao.java
+
+public static ArrayList<Emp> selectEmpAndDeptList() throws Exception {
+	ArrayList<Emp> list = new ArrayList<Emp>();
+	Connection con = dbConnection();
+		
+	PreparedStatement stmt = con.prepareStatement(쿼리는 위와 같다.);
+	ResultSet rs = stmt.executeQuery();
+		
+	while(rs.next()) {
+		Emp emp = new Emp();
+			
+		emp.empno = rs.getInt(1);
+		emp.ename = rs.getString(2);
+		emp.job = rs.getString(3);
+		emp.mgr = rs.getInt(4);
+		emp.hiredate = rs.getString(5);
+		emp.sal = rs.getInt(6);
+		emp.comm = rs.getInt(7);
+
+		Dept dept = new Dept();
+		dept.deptno = rs.getInt(8);
+		dept.dname = rs.getString(9);
+		dept.loc = rs.getString(10);
+		emp.dept = dept;
+			
+		list.add(emp);
+	}
+	return list;
+
+}
+
+EmpAndDept.jsp (실행)
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page import="com.test.*" %>
+<%@ page import="java.util.ArrayList" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>Insert title here</title>
+</head>
+<body>
+<%
+	ArrayList<Emp> list = EmpDao.selectEmpAndDeptList();
+	for(Emp emp : list) {
+%>
+	 <%=emp.empno%> <%=emp.ename%> <%=emp.job%> 
+      <%=emp.mgr%> <%=emp.hiredate.substring(0, 10)%> <%=emp.sal%> <%=emp.comm%> 
+      <%=emp.dept.deptno%> <%=emp.dept.dname%> <%=emp.dept.loc%>
+   <br/>
+<%
+	}
+%>
+</body>
+
+</html>
