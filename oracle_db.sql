@@ -11,25 +11,25 @@ CREATE TABLE user_tbl (
 
 
 CREATE TABLE book_tbl (
-  book_id varchar(10) NOT NULL,
-  book_code char(2) not null,
-  book_name varchar(50) NOT NULL,
-  book_author varchar(30) NOT NULL,
-  book_date char(8) NOT NULL,
-  book_pub  varchar(100) NOT NULL,
+  book_id varchar2(10) NOT NULL,
+  book_code varchar2(2) not null,
+  book_name varchar2(50) NOT NULL,
+  book_author varchar2(30) NOT NULL,
+  book_date varchar2(8) NOT NULL,
+  book_pub  varchar2(100) NOT NULL,
   book_in_date date,
-  book_imgPath varchar(100),
+  book_imgPath varchar2(100),
   PRIMARY KEY (book_id)
 );
 
 CREATE TABLE rent_tbl (
-  rent_no varchar(12) NOT NULL,
-  user_id varchar(10) NOT NULL,
-  book_id varchar(10) not null,
+  rent_no varchar2(12) NOT NULL,
+  user_id varchar2(10) NOT NULL,
+  book_id varchar2(10) not null,
   book_rent_date date NOT NULL,
   book_re_due_date date NOT NULL,
   book_re_date date,
-  book_status char(1) default '1',
+  book_status varchar2(1) default '1',
   PRIMARY KEY (rent_no),
   foreign key(user_id) references user_tbl(user_id),
   foreign key(book_id) references book_tbl(book_id)
