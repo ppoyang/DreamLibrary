@@ -36,7 +36,7 @@ CREATE TABLE rent_tbl (
 );
 
 
-create or replace trigger tri3
+create or replace trigger user_id_tri
 after update on user_tbl
 for each row
 begin
@@ -45,7 +45,7 @@ begin
   where user_id=:old.user_id;
 end;
 
-create or replace trigger tri4
+create or replace trigger book_id_tri
 after update on book_tbl
 for each row
 begin
