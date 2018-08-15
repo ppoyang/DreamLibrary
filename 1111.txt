@@ -1,0 +1,19 @@
+<jsp:include page="uploadbody.jsp" flush="true"/>
+ <jsp:param name="sTargetName" value="<%=sTargetName%>"/>
+ <jsp:param name="iFileListQty" value="<%=iFileListQty%>"/>
+ <jsp:param name="sFormName" value="<%=sFormName%>"/>
+ <jsp:param name="sFormAction" value="<%=sFormAction%>"/>
+</jsp:include>
+
+--->>>uploadbody.jsp
+
+ 
+
+String sTargetName  = request.getParameter("sTargetName");
+String sFormName  = request.getParameter("sFormName");
+String sFormAction  = request.getParameter("sFormAction");
+
+ 
+<jsp:include page="uploadbody.jsp" flush="true"/>
+vs
+<jsp:include page="uploadbody.jsp" flush="true"> 
