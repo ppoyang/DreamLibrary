@@ -17,3 +17,11 @@ String sFormAction  = request.getParameter("sFormAction");
 <jsp:include page="uploadbody.jsp" flush="true"/>
 vs
 <jsp:include page="uploadbody.jsp" flush="true"> 
+
+
+<%
+    List<LandingCategory> cats = beanFactory.getLandingCategories();
+%>
+<c:set var="cats" scope="request" value="<%=cats%>"/>
+<jsp:include page="/jsp/modules/index/index_categories.jsp"/>
+
