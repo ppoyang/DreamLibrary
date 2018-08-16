@@ -19,5 +19,5 @@ end;
 select book_id, book_name, book_author, book_pub, book_date, 
        decode(fun_bookstatus(book_id),null,'0',fun_bookstatus(book_id)) as book_status
   from book_tbl
- where book_id = '010000102'
+ where book_id = '0100000102'
   order by book_id asc;
