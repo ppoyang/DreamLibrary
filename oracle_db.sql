@@ -53,3 +53,13 @@ begin
   set book_id=:new.book_id
   where book_id=:old.book_id;
 end;
+
+
+
+INSERT  INTO BOOK_TBL VALUES ('0100000102','01','스프링','코딩단','20150816','남가람북스',sysdate,'');
+INSERT  INTO BOOK_TBL VALUES ('1410000101','14','Spring','코딩단','20150816','남가람북스',sysdate,'');
+INSERT  INTO BOOK_TBL VALUES ('1410000102','14','Spring','코딩단','20150816','남가람북스',sysdate,'');
+INSERT  INTO BOOK_TBL VALUES ('1410000103','14','Spring','코딩단','20150816','남가람북스',sysdate,'');
+INSERT  INTO BOOK_TBL VALUES ('2100000101','21','JSP','JSP','20150816','남가람북스',sysdate,'');
+INSERT  INTO BOOK_TBL VALUES ('2100000102','21','JSP','JSP','20150816','남가람북스',sysdate,'');
+INSERT  INTO BOOK_TBL VALUES ('2100000103','21','JSP','JSP','20150816','남가람북스',sysdate,'');
